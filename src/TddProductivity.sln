@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddProductivity.Plugin", "TddProductivity.Plugin\TddProductivity.Plugin.csproj", "{4223E1C5-7AC8-4B81-942F-F331B972028C}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TddProductivity.Setup", "TddProductivity.Setup\TddProductivity.Setup.vdproj", "{412CB388-03B6-40E4-A47D-1DF4FEF91A1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddProductivity.Tests", "TddProductivity.Tests\TddProductivity.Tests.csproj", "{E2BA10E2-4A14-4CFD-B8B8-F27F85EBE309}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4223E1C5-7AC8-4B81-942F-F331B972028C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4223E1C5-7AC8-4B81-942F-F331B972028C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4223E1C5-7AC8-4B81-942F-F331B972028C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4223E1C5-7AC8-4B81-942F-F331B972028C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{412CB388-03B6-40E4-A47D-1DF4FEF91A1C}.Debug|Any CPU.ActiveCfg = Debug
+		{412CB388-03B6-40E4-A47D-1DF4FEF91A1C}.Debug|Any CPU.Build.0 = Debug
+		{412CB388-03B6-40E4-A47D-1DF4FEF91A1C}.Release|Any CPU.ActiveCfg = Release
+		{412CB388-03B6-40E4-A47D-1DF4FEF91A1C}.Release|Any CPU.Build.0 = Release
+		{E2BA10E2-4A14-4CFD-B8B8-F27F85EBE309}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2BA10E2-4A14-4CFD-B8B8-F27F85EBE309}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2BA10E2-4A14-4CFD-B8B8-F27F85EBE309}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2BA10E2-4A14-4CFD-B8B8-F27F85EBE309}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
