@@ -5,6 +5,8 @@ using System.Text;
 using JetBrains.DocumentModel;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi;
+using JetBrains.ReSharper.Psi.CSharp.Tree;
+using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.TextControl;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
@@ -33,8 +35,13 @@ namespace TddProductivity.Tests
         [Test]
         public void Should_find_an_element()
         {
-            _documentManager.Stub(d => d.GetProjectFile(null)).IgnoreArguments().Return(CreateDependency<IProjectFile>());
-
+            IProjectFile projectFile = CreateDependency<IProjectFile>();
+            _textControl.Stub(t => t.Document).Return(CreateDependency<IDocument>()).Repeat.Any();
+            _documentManager.Stub(d => d.GetProjectFile(_textControl.Document)).Return(projectFile);
+            IFile file = CreateDependency<ICSharpFile>();
+            _psiManager.Stub(p => p.GetPsiFile(projectFile)).Return(file);
+            file.Stub(f => f.FindTokenAt(0)).IgnoreArguments().Return(CreateDependency<IElement>());
+            _textControl.Stub(t => t.CaretModel).Return(CreateDependency<ICaretModel>());
             var element = SUT.GetElementAtCaret();
             
             Assert.That(element,Is.Not.Null);
