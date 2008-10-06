@@ -23,8 +23,10 @@ namespace TddProductivity.MoveClass
         }
 
         public ElementFinder(ISolution solution, ITextControl textControl, DocumentManager documentManager,PsiManager psiManager)
-            : this(solution, textControl)
+            
         {
+            _solution = solution;
+            _textControl = textControl;
             _documentManager = documentManager;
             _psiManager = psiManager;
         }

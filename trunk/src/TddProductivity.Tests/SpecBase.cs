@@ -7,20 +7,18 @@ namespace TddProductivity.Tests
     public abstract class SpecBase<T>
     {
         protected T SUT        { get; private set;        }
-        protected MockRepository mockRepository;
 
         [SetUp]
         public void Setup()
         {
-            mockRepository= new MockRepository();
             SUT = SetupSUT();
         }
 
 #pragma warning disable 693
-        protected T CreateDependency<T>()
+        protected T CreateDependency<T>() where T : class
 #pragma warning restore 693
         {
-            return mockRepository.CreateMock<T>();
+            return MockRepository.GenerateStub<T>();
         }
 
 
