@@ -1,6 +1,4 @@
-Listing of current features
-
-Move type to new file in different project.
+  # Move type to new file in different project.
 
 = Details =
 
