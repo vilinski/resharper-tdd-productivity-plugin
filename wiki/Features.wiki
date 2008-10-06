@@ -1,6 +1,6 @@
   # Move type to new file in different project.
 
-= Details =
+=== Details ===
 
 1. Move type to new file in different project.
   * When cursor is on a class/interface name and is the second(or greater) type declared in a code file.  A new set of context actions(Yellow light bulb) options will appear.
