@@ -112,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MoveClass\ElementFinder.cs" />
+    <Compile Include="MoveClass\IElementFinder.cs" />
     <Compile Include="MoveClass\MoveClassBulbItem.cs">
       <SubType>Code</SubType>
     </Compile>

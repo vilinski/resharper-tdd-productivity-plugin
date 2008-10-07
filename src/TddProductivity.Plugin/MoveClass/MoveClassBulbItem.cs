@@ -15,35 +15,51 @@ namespace TddProductivity.MoveClass
 {
     public class MoveClassBulbItem : IBulbItem
     {
-        private readonly MoveTypeToAnotherFileAction _action;
+        private readonly IBulbItem _action;
         private readonly IProject _project;
+        private IElementFinder _elementFinder;
 
 
-        public MoveClassBulbItem(IProject project, MoveTypeToAnotherFileAction action) 
+        public MoveClassBulbItem(IProject project, IBulbItem action,IElementFinder elementFinder) 
         {
             _project = project;
             _action = action;
+            _elementFinder = elementFinder;
         }
 
         public void Execute(ISolution solution, ITextControl textControl)
         {
-            ElementFinder elementFinder = new ElementFinder(solution,textControl);
-            IElement element = elementFinder.GetElementAtCaret();
+            IElement element = _elementFinder.GetElementAtCaret();
             
             if (element == null)
                 throw new InvalidOperationException();
 
-            string classname = element.GetText();
-
-            IProjectFolder parentFolder = element.GetProjectFile().ParentFolder;
-
             _action.Execute(solution, textControl);
 
+            AssertReadAccess();
+
+            IProjectItem sourceFile = GetSourceFile(element);
+
+            IProjectFile newFile = MoveFileToProject(sourceFile);
+
+            OpenFileInEditor(solution, newFile);
+
+            sourceFile.Remove();
+        }
+
+        public virtual void AssertReadAccess()
+        {
             Shell.Instance.Locks.AssertReadAccessAllowed();
+        }
 
+        public virtual void OpenFileInEditor(ISolution solution, IProjectFile newFile)
+        {
+            EditorManager editor = EditorManager.GetInstance(solution);
+            ITextControl textcontrol = editor.OpenFile(newFile.Location.FullPath, true, false);
+        }
 
-            IProjectItem sourceFile = parentFolder.GetSubItem(classname + ".cs");
-
+        public  virtual IProjectFile MoveFileToProject(IProjectItem sourceFile)
+        {
             string destFileName = _project.Location.Combine(sourceFile.Location.Name).FullPath;
 
             if (!File.Exists(destFileName))
@@ -51,11 +67,16 @@ namespace TddProductivity.MoveClass
                 File.Move(sourceFile.Location.FullPath, destFileName);
             }
 
-            IProjectFile newFile = _project.CreateFile(_project.Location.Combine(sourceFile.Location.Name));
+            return _project.CreateFile(_project.Location.Combine(sourceFile.Location.Name));
+        }
 
-            EditorManager editor = EditorManager.GetInstance(solution);
-            ITextControl textcontrol = editor.OpenFile(newFile.Location.FullPath, true, false);
-            sourceFile.Remove();
+        public virtual IProjectItem GetSourceFile(IElement element)
+        {
+            string classname = element.GetText();
+
+            IProjectFolder parentFolder = element.GetProjectFile().ParentFolder;
+
+            return parentFolder.GetSubItem(classname + ".cs");
         }
 
         string IBulbItem.Text

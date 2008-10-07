@@ -52,7 +52,7 @@ namespace TddProductivity.MoveClass
                     IProject project = reference.ResolveReferencedProject();
                     if (CanMoveToThisProject(project))
                     {
-                        items.Add(new MoveClassBulbItem(project, _action));
+                        items.Add(new MoveClassBulbItem(project, _action,new ElementFinder(this._solution,this._textControl)));
                     }
                 }
                 return items.ToArray();
