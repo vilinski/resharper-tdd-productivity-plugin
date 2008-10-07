@@ -7,7 +7,7 @@ using JetBrains.TextControl;
 
 namespace TddProductivity.MoveClass
 {
-    public class ElementFinder
+    public class ElementFinder : IElementFinder
     {
         private readonly DocumentManager _documentManager;
         private readonly ISolution _solution;
