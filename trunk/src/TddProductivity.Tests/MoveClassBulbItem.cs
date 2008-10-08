@@ -3,6 +3,7 @@ using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.TextControl;
 using NUnit.Framework;
+using NUnit.Framework.SyntaxHelpers;
 using Rhino.Mocks;
 using TddProductivity.MoveClass;
 
@@ -22,12 +23,14 @@ namespace TddProductivity.Tests
         }
 
         [Test]
-        public void Should_MehodName()
+        public void Should_Copy_the_new_file_to_the_destination_project()
         {
             var solution = CreateDependency<ISolution>();
             var textControl = CreateDependency<ITextControl>();
 
             SUT.Execute(solution, textControl);
+            var sut = SUT as MoveClass;
+            Assert.That(sut.CopiedFileToNewProject,Is.True);
         }
 
 
@@ -41,6 +44,7 @@ namespace TddProductivity.Tests
         public MoveClass(IProject project, IBulbItem action, IElementFinder elementFinder)
             : base(project, action, elementFinder)
         {
+            CopiedFileToNewProject = false;
         }
 
         public override void AssertReadAccess()
@@ -59,6 +63,9 @@ namespace TddProductivity.Tests
 
         public override void OpenFileInEditor(ISolution solution, IProjectFile newFile)
         {
+            CopiedFileToNewProject = true;
         }
+
+        public bool CopiedFileToNewProject { get; set; }
     }
 }
