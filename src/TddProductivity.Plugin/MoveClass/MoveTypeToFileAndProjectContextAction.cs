@@ -14,19 +14,23 @@ namespace TddProductivity.MoveClass
     public class MoveTypeToFileAndProjectContextAction : IContextAction
     {
         private readonly MoveTypeToAnotherFileAction _action;
+        private readonly ElementFinder _elementFinder;
         private readonly ISolution _solution;
         private readonly ITextControl _textControl;
-        private IProject _currentProject;
-        private ElementFinder _elementFinder;
+
 
         public MoveTypeToFileAndProjectContextAction(ISolution solution, ITextControl textControl)
 
         {
             _solution = solution;
             _textControl = textControl;
-            _elementFinder = new ElementFinder(solution,textControl);
+            _elementFinder = new ElementFinder(solution, textControl);
             _action = new MoveTypeToAnotherFileAction(solution, textControl);
         }
+
+        public IProject CurrentProject { get; set; }
+
+        #region IContextAction Members
 
         public bool IsAvailable(IUserDataHolder cache)
         {
@@ -35,7 +39,7 @@ namespace TddProductivity.MoveClass
             if (element == null)
                 return false;
 
-            _currentProject = element.GetProject();
+            CurrentProject = element.GetProject();
 
             return _action.IsAvailable(cache);
         }
@@ -44,7 +48,7 @@ namespace TddProductivity.MoveClass
         {
             get
             {
-                ICollection<IProjectReference> refs = _currentProject.GetProjectReferences();
+                ICollection<IProjectReference> refs = CurrentProject.GetProjectReferences();
 
                 var items = new List<IBulbItem>();
                 foreach (IProjectReference reference in refs)
@@ -52,19 +56,20 @@ namespace TddProductivity.MoveClass
                     IProject project = reference.ResolveReferencedProject();
                     if (CanMoveToThisProject(project))
                     {
-                        items.Add(new MoveClassBulbItem(project, _action,new ElementFinder(this._solution,this._textControl)));
+                        items.Add(new MoveClassBulbItem(project, _action, new ElementFinder(_solution, _textControl)));
                     }
                 }
                 return items.ToArray();
             }
         }
 
+        #endregion
+
         public bool CanMoveToThisProject(IProject project)
         {
             return project.Kind == ProjectItemKind.PROJECT &&
-                   !project.Name.Equals(_currentProject.Name, StringComparison.InvariantCultureIgnoreCase) &&
-                   project.LanguageType == _currentProject.LanguageType;
+                   !project.Name.Equals(CurrentProject.Name, StringComparison.InvariantCultureIgnoreCase) &&
+                   project.LanguageType == CurrentProject.LanguageType;
         }
-
     }
 }

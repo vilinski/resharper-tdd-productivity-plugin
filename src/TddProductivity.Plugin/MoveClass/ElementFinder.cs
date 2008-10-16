@@ -10,9 +10,9 @@ namespace TddProductivity.MoveClass
     public class ElementFinder : IElementFinder
     {
         private readonly DocumentManager _documentManager;
+        private readonly PsiManager _psiManager;
         private readonly ISolution _solution;
         private readonly ITextControl _textControl;
-        private readonly PsiManager _psiManager;
 
         public ElementFinder(ISolution solution, ITextControl textControl)
         {
@@ -22,14 +22,17 @@ namespace TddProductivity.MoveClass
             _psiManager = PsiManager.GetInstance(_solution);
         }
 
-        public ElementFinder(ISolution solution, ITextControl textControl, DocumentManager documentManager,PsiManager psiManager)
-            
+        public ElementFinder(ISolution solution, ITextControl textControl, DocumentManager documentManager,
+                             PsiManager psiManager)
+
         {
             _solution = solution;
             _textControl = textControl;
             _documentManager = documentManager;
             _psiManager = psiManager;
         }
+
+        #region IElementFinder Members
 
         public IElement GetElementAtCaret()
         {
@@ -52,5 +55,7 @@ namespace TddProductivity.MoveClass
 
             return file.FindTokenAt(_textControl.CaretModel.Offset);
         }
+
+        #endregion
     }
 }

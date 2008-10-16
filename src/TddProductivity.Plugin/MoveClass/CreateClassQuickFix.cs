@@ -1,55 +1,94 @@
-using JetBrains.ReSharper.CodeInsight.Services.Intentions;
+using System.Collections.Generic;
+using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Daemon.CSharp.Stages;
-using JetBrains.ReSharper.Psi;
-using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
-using JetBrains.ReSharper.Psi.Resolve;
-using JetBrains.ReSharper.QuickFixes.Test;
 using JetBrains.Util;
+using ProjectUtil=TddProductivity.Projects.ProjectUtil;
 
 namespace TddProductivity.MoveClass
 {
-    [Intention("CSHARP", "CreateClass")]
-    public class CreateClassQuickFix:IQuickFix
+    [QuickFix(100)]
+    public class CreateClassQuickFix : IQuickFix
     {
-        private readonly NotResolvedError _error;
-        private IReference reference;
+        private readonly NotResolvedError error;
+        private readonly IQuickFix quickFix;
 
         public CreateClassQuickFix(NotResolvedError error)
         {
-            _error = error;
-            reference = error.Reference;
-            this.ReferenceName = reference.GetElement() as IReferenceName;
+            this.error = error;
 
+            quickFix = Activator.CreateCreateClassFix(error);
         }
 
-        private IReferenceName ReferenceName { get; set; }
+        #region IQuickFix Members
 
         public bool IsAvailable(IUserDataHolder cache)
         {
-            
-            IReferenceName qualifier = ReferenceName.Qualifier;
-            if (qualifier == null)
-            {
-                return (ReferenceName.GetContainingFile() != null);
-            }
-            IDeclaredElement declaredElement = qualifier.Reference.Resolve().DeclaredElement;
-            if (declaredElement == null)
-            {
-                return false;
-            }
-            if (declaredElement is INamespace)
-            {
-                return true;
-            }
-            IExternAlias externAlias = declaredElement as IExternAlias;
-            return ((externAlias != null) && (externAlias.Module == qualifier.GetProject()));
+            bool available = quickFix.IsAvailable(cache);
+            return available;
         }
 
         public IBulbItem[] Items
         {
-            get { throw new System.NotImplementedException(); }
+            get
+            {
+                var quickFixItems = new List<IBulbItem>();
+
+                IProjectFile projectFile = GetProjectFile();
+
+                string classname = GetClassName();
+
+                IProject sourceProject = projectFile.GetProject();
+
+                string relativeNamespace = GetRelativeNamespace(sourceProject);
+
+                foreach (IProject project in ProjectUtil.GetReferencedProjects(sourceProject))
+                {
+                    BulbItem item = CreateBulbItem(classname, relativeNamespace, project);
+
+                    quickFixItems.Add(item);
+                }
+                return quickFixItems.ToArray();
+            }
+        }
+
+        #endregion
+
+        private BulbItem CreateBulbItem(string classname, string relativeNamespace, IProject project)
+        {
+            var DTO = new CreateClassRequestMessage
+                          {
+                              Classname = classname,
+                              Namespace = relativeNamespace,
+                              Project = project
+                          };
+            string QuickFixText = "Create Class in " + project.Name;
+            return new BulbItem(QuickFixText, new CreateClassAction(DTO));
+        }
+
+        private string GetRelativeNamespace(IProject sourceProject)
+        {
+            string nameSpace = GetNameSpace();
+            string defaultNamespace = sourceProject.GetDefaultNamespaceProperty();
+            return nameSpace.Replace(defaultNamespace, "");
+        }
+
+        private string GetNameSpace()
+        {
+            var namespaceBodyNode =
+                error.Reference.GetElement().GetContainingElement<INamespaceBodyNode>(false);
+            return namespaceBodyNode.NamespaceDeclaration.DeclaredName;
+        }
+
+        private string GetClassName()
+        {
+            return ((IReferenceName) error.Reference.GetElement()).ShortName;
+        }
+
+        private IProjectFile GetProjectFile()
+        {
+            return error.Reference.GetElement().GetProjectFile();
         }
     }
 }
