@@ -28,20 +28,14 @@ namespace TddProductivity.MoveClass
         public void Execute(ISolution solution, ITextControl textControl)
         {
             IElement element = _elementFinder.GetElementAtCaret();
-
             if (element == null)
                 throw new InvalidOperationException();
-
+            IProjectItem parentFolder = GetParentFolder(element);
             _action.Execute(solution, textControl);
-
             AssertReadAccess();
-
-            IProjectItem sourceFile = GetSourceFile(element);
-
+            IProjectItem sourceFile = GetSourceFile(parentFolder,element);
             IProjectFile newFile = MoveFileToProject(sourceFile);
-
             OpenFileInEditor(solution, newFile);
-
             sourceFile.Remove();
         }
 
@@ -75,13 +69,24 @@ namespace TddProductivity.MoveClass
             return _project.CreateFile(_project.Location.Combine(sourceFile.Location.Name));
         }
 
-        public virtual IProjectItem GetSourceFile(IElement element)
+        private static IProjectItem GetSourceFile(IProjectItem parentFolder, IElement element)
         {
             string classname = element.GetText();
-
-            IProjectFolder parentFolder = element.GetProjectFile().ParentFolder;
-
             return parentFolder.GetSubItem(classname + ".cs");
+        }
+
+        public virtual IProjectItem GetSourceFile(IElement element)
+        {
+            return GetSourceFile(GetParentFolder(element), element);
+        }
+        public virtual IProjectItem GetParentFolder(IElement element)
+        {
+            IProjectFile file = element.GetProjectFile();
+            if (file==null)
+            {
+                throw new NullReferenceException("Unable to get Project File from Element");
+            }
+            return file.ParentFolder;
         }
     }
 }

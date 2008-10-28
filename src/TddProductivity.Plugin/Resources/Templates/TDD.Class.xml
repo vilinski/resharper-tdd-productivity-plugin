@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Template uid="709aeb14-a91a-4478-a2fa-53626692d55e" text="using System;&#xD;&#xA;using System.Collections.Generic;&#xD;&#xA;&#xD;&#xA;namespace $NAMESPACE$&#xD;&#xA;{&#xD;&#xA;  public class $CLASS$&#xD;&#xA;  {&#xD;&#xA;     &#xD;&#xA;  }&#xD;&#xA;}" shortcut="" description="ClassUnderTest" reformat="true" shortenQualifiedReferences="true">
+<Template uid="709aeb14-a91a-4478-a2fa-53626692d55e" text="using System;&#xD;&#xA;using System.Collections.Generic;&#xD;&#xA;&#xD;&#xA;namespace $NAMESPACE$&#xD;&#xA;{&#xD;&#xA;  public class $CLASS$&#xD;&#xA;  {&#xD;&#xA;     &#xD;&#xA;  }&#xD;&#xA;}" shortcut="" description="TDD.Class" reformat="true" shortenQualifiedReferences="true">
   <Context>
     <ProjectLanguageContext language="CSharp" />
   </Context>

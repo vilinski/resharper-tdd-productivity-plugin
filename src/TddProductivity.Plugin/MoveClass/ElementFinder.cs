@@ -53,7 +53,12 @@ namespace TddProductivity.MoveClass
                 return null;
             }
 
-            return file.FindTokenAt(_textControl.CaretModel.Offset);
+            var element = file.FindTokenAt(_textControl.CaretModel.Offset);
+
+            if (element is JetBrains.ReSharper.Psi.CSharp.Tree.IWhitespaceNode)
+                element = file.FindTokenAt(_textControl.CaretModel.Offset-1);
+            
+            return element;
         }
 
         #endregion

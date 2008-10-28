@@ -1,5 +1,6 @@
 using EnvDTE;
 using JetBrains.ProjectModel;
+using JetBrains.ProjectModel.Impl;
 using JetBrains.Util;
 using JetBrains.VSIntegration.ProjectModel;
 
@@ -17,28 +18,41 @@ namespace TddProductivity.Folders
             Project envProject = projectInfo.GetExtProject();
             ProjectItem projectItem = null;
             ProjectItems projectItems = envProject.ProjectItems;
+
+
+            IProjectFolder parent = project;
+            
             foreach (string folder in folders)
             {
-                projectItem = GetOrCreateFolder(projectItems, folder);
-                if (projectItem == null) return null;
-                projectItems = projectItem.ProjectItems;
+                var item = parent.GetSubItem(folder);
+                if (item == null)
+                {
+                    JetBrains.ProjectModel.Impl.ProjectFolderImpl fold = (JetBrains.ProjectModel.Impl.ProjectFolderImpl)parent;
+                    
+                    item = fold.DoCreateFolder(folder);
+                    fold.BuildFromFileSystem();
+                }
+                parent = (IProjectFolder)item;
             }
-
-            return project.FindProjectItemByLocation(new FileSystemPath(projectItem.get_FileNames(0))) as IProjectFolder;
+            project.BuildFromFileSystem();
+            project.SaveSettings();
+            return parent;
         }
 
-        private static ProjectItem GetOrCreateFolder(ProjectItems projectItems, string folder)
+        private static IProjectFolder GetOrCreateFolder(ProjectItems projectItems, string folder)
         {
+            
             foreach (ProjectItem projectItem in projectItems)
             {
                 if (projectItem.Kind == Constants.vsProjectItemKindPhysicalFolder && projectItem.Name == folder)
                 {
-                    return projectItem;
+                    return (IProjectFolder) projectItem;
                 }
             }
-
-            ProjectItem newFolder = projectItems.AddFolder(folder, Constants.vsProjectItemKindPhysicalFolder);
-            return newFolder;
+            ProjectItem newFolder = projectItems.AddFolder(folder,null);
+            //ProjectModelSynchronizer.FixProjectFolder();   
+            
+            return  null;
         }
     }
 }

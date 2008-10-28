@@ -21,7 +21,8 @@ using JetBrains.UI.Shell.PluginSupport;
 [assembly: AssemblyKeyName("")]
 [assembly: PluginTitle("Test Driven Development - Productivity")]
 [assembly: PluginVendor("Eric Hexter")]
-[assembly: PluginDescription(   "Add context and quick fix actions to streamline Test Driven Development.\n\r" +
-                                "For More information about this plugin and updated versions\n\r" +
-                                "see the google project: http://code.google.com/p/resharper-tdd-productivity-plugin/ \n\r"+ 
-                                "special thanks to the Agent Johnson and Resharper.TestDrive project")]
+[assembly: PluginDescription(   
+@"Add context and quick fix actions to streamline Test Driven Development.
+For More information about this plugin and updated versions see the google 
+project: http://code.google.com/p/resharper-tdd-productivity-plugin/
+special thanks to the Agent Johnson and Resharper.TestDrive projects")]
