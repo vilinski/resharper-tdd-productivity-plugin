@@ -8,6 +8,6 @@ namespace TddProductivity.MoveClass
 
         public string Namespace { get; set; }
 
-        public IProject Project { get; set; }
+        public IProjectFolder Project { get; set; }
     }
 }

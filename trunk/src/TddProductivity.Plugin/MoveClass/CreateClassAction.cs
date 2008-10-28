@@ -21,7 +21,7 @@ namespace TddProductivity.MoveClass
         public void Execute()
         {
             var folderCreator = new FolderCreator();
-            IProjectFolder folder = folderCreator.GetOrCreateNestedFolders(createClassRequestMessage.Project,
+            IProjectFolder folder = folderCreator.GetOrCreateNestedFolders(createClassRequestMessage.Project.GetProject(),
                                                                            ConvertNamespaceToFolderNameArray());
             var fetcher = new TemplateFetcher(new DefaultTemplateCreator(), new FolderTemplateFetcher(),
                                               new TemplateFolderPrioritizer());
