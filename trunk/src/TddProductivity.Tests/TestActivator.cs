@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Daemon.CSharp.Stages;
 using JetBrains.ReSharper.Psi.Resolve;
@@ -21,8 +18,8 @@ namespace TddProductivity.Tests
         [Test]
         public void Should_create_createClassClassFromNewFix()
         {
-            IQuickFix fix= Activator.CreateCreateClassFix(new NotResolvedError(MockRepository.GenerateMock<IReference>()));
-            Assert.That(fix,Is.InstanceOfType(typeof(IQuickFix)));
+            IQuickFix fix = Activator.CreateCreateClassFix(new NotResolvedError(MockRepository.GenerateMock<IReference>()));
+            Assert.That(fix, Is.InstanceOfType(typeof(IQuickFix)));
         }
     }
 }

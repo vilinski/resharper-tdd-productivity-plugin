@@ -7,9 +7,9 @@ namespace TddProductivity.MoveClass
     public class BulbItem : IBulbItem
     {
         private readonly string _text;
-        private readonly CreateClassAction action;
+        private readonly IExecuteAction action;
 
-        public BulbItem(string text, CreateClassAction action)
+        public BulbItem(string text, IExecuteAction action)
         {
             _text = text;
             this.action = action;

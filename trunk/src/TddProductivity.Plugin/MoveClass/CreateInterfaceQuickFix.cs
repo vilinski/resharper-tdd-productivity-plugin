@@ -10,16 +10,16 @@ using ProjectUtil = TddProductivity.Projects.ProjectUtil;
 namespace TddProductivity.MoveClass
 {
     [QuickFix(100)]
-    public class CreateClassQuickFix : IQuickFix
+    public class CreateInterfaceQuickFix : IQuickFix
     {
         private readonly NotResolvedError error;
         private readonly IQuickFix quickFix;
 
-        public CreateClassQuickFix(NotResolvedError error)
+        public CreateInterfaceQuickFix(NotResolvedError error)
         {
             this.error = error;
 
-            quickFix = Activator.CreateCreateClassFix(error);
+            quickFix = Activator.CreateInterfaceClassFix(error);
         }
 
         #region IQuickFix Members
@@ -39,7 +39,7 @@ namespace TddProductivity.MoveClass
                 IProjectFile projectFile = GetProjectFile();
 
                 string classname = GetClassName();
-                if (classname.StartsWith("I", StringComparison.InvariantCultureIgnoreCase))
+                if (!classname.StartsWith("I", StringComparison.InvariantCultureIgnoreCase))
                 {
                     return quickFixItems.ToArray();
                 }
@@ -60,16 +60,16 @@ namespace TddProductivity.MoveClass
 
         #endregion
 
-        private BulbItem CreateBulbItem(string classname, string relativeNamespace, IProject project)
+        private BulbItem CreateBulbItem(string interfacename, string relativeNamespace, IProject project)
         {
-            var DTO = new CreateClassRequestMessage
+            var DTO = new CreateInterfaceRequestMessage
                           {
-                              Classname = classname,
+                              Interfacename = interfacename,
                               Namespace = relativeNamespace,
                               Project = project
                           };
-            string QuickFixText = "Create Class in " + project.Name;
-            return new BulbItem(QuickFixText, new CreateClassAction(DTO));
+            string QuickFixText = "Create Interface in " + project.Name;
+            return new BulbItem(QuickFixText, new CreateInterfaceAction(DTO));
         }
 
         private string GetRelativeNamespace(IProject sourceProject)
