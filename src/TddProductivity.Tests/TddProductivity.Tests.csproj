@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E2BA10E2-4A14-4CFD-B8B8-F27F85EBE309}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -93,7 +93,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activator.cs" />
     <Compile Include="ElementFinderSpecs.cs" />
     <Compile Include="MoveClassBulbItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

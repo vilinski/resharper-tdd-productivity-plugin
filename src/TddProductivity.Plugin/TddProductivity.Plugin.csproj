@@ -233,6 +233,9 @@
     <Compile Include="Folders\FolderCreator.cs" />
     <Compile Include="MoveClass\ActionChainProcessor.cs" />
     <Compile Include="MoveClass\BulbItem.cs" />
+    <Compile Include="MoveClass\CreateInterfaceQuickFix.cs" />
+    <Compile Include="MoveClass\CreateInterfaceRequestMessage.cs" />
+    <Compile Include="MoveClass\CreateInterfaceAction.cs" />
     <Compile Include="MoveClass\CreateClassAction.cs" />
     <Compile Include="MoveClass\CreateClassQuickFix.cs" />
     <Compile Include="MoveClass\CreateClassRequestMessage.cs" />
@@ -254,6 +257,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Templates\TDD.Class.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Templates\TDD.Interface.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
