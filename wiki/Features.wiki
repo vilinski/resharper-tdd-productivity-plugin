@@ -11,3 +11,9 @@
 
 Here is an example of the context action working in the MvcContrib source code. The items circled in red were added by this plugin.
 [http://resharper-tdd-productivity-plugin.googlecode.com/svn/content/MoveToProjectScreenShot.JPG]
+
+2. Create class in a referenced project.
+tbd
+
+3. Create interface in a referenced project.
+tbd
