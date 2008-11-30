@@ -1,7 +1,8 @@
+{{{
 1. Move type to new file in different project.
 2. Create class in a referenced project.
 3. Create interface in a referenced project.
-
+}}}
 === Details ===
 
 1. Move type to new file in different project.
