@@ -1,6 +1,6 @@
-  # Move type to new file in different project.
-  # Create class in a referenced project.
-  # Create interface in a referenced project.
+# Move type to new file in different project.
+# Create class in a referenced project.
+# Create interface in a referenced project.
 
 === Details ===
 
