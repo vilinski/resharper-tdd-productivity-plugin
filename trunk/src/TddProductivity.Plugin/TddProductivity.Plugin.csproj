@@ -20,7 +20,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\Program Files\JetBrains\ReSharper\v4.1\Bin\Plugins\TddProductivity\</OutputPath>
+    <OutputPath>c:\Program Files\JetBrains\ReSharper\v4.1\Bin\Plugins\TddProductivity\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -35,6 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="envdte, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="EnvDTE80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\Program Files\Microsoft Visual Studio 9.0\Common7\IDE\PublicAssemblies\EnvDTE80.dll</HintPath>
+    </Reference>
     <Reference Include="JetBrains.Platform.CommonServices, Version=1.0.96.26625, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\resharper\v4.1\Bin\JetBrains.Platform.CommonServices.dll</HintPath>
@@ -230,12 +234,9 @@
   <ItemGroup>
     <Compile Include="Activator.cs" />
     <Compile Include="AutoUpdate.cs" />
-    <Compile Include="Folders\FolderCreator.cs" />
+    <Compile Include="Folders\VsFolderCreator.cs" />
     <Compile Include="MoveClass\ActionChainProcessor.cs" />
     <Compile Include="MoveClass\BulbItem.cs" />
-    <Compile Include="MoveClass\CreateInterfaceQuickFix.cs" />
-    <Compile Include="MoveClass\CreateInterfaceRequestMessage.cs" />
-    <Compile Include="MoveClass\CreateInterfaceAction.cs" />
     <Compile Include="MoveClass\CreateClassAction.cs" />
     <Compile Include="MoveClass\CreateClassQuickFix.cs" />
     <Compile Include="MoveClass\CreateClassRequestMessage.cs" />
@@ -248,8 +249,16 @@
     <Compile Include="MoveClass\MoveTypeToFileAndProjectContextAction.cs" />
     <Compile Include="Projects\ProjectUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Resources\tdd.class\ClassUnderTest.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\tdd.interface\ClassUnderTest.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Compile Include="Templates\DefaultTemplateCreator.cs" />
     <Compile Include="Templates\FolderTemplateFetcher.cs" />
+    <Compile Include="Templates\IDefaultTemplateCreator.cs" />
+    <Compile Include="Templates\TemplateDefinition.cs" />
     <Compile Include="Templates\TemplateFetcher.cs" />
     <Compile Include="Templates\TemplateFieldPopulator.cs" />
     <Compile Include="Templates\TemplateFileCreator.cs" />
@@ -260,6 +269,20 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Templates\TDD.Interface.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\tdd.class\ClassUnderTest.vstemplate">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\tdd.class\__TemplateIcon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\tdd.interface\ClassUnderTest.vstemplate">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\tdd.interface\__TemplateIcon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -22,7 +22,7 @@ namespace TddProductivity.MoveClass
             quickFix = Activator.CreateCreateClassFix(error);
         }
 
-        #region IQuickFix Members
+        
 
         public bool IsAvailable(IUserDataHolder cache)
         {
@@ -34,6 +34,8 @@ namespace TddProductivity.MoveClass
         {
             get
             {
+                string templateFilename="tdd.class";
+                string templateName="Class";
                 var quickFixItems = new List<IBulbItem>();
 
                 IProjectFile projectFile = GetProjectFile();
@@ -41,7 +43,8 @@ namespace TddProductivity.MoveClass
                 string classname = GetClassName();
                 if (classname.StartsWith("I", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    return quickFixItems.ToArray();
+                    templateFilename = "tdd.interface";
+                    templateName = "Interface";
                 }
 
                 IProject sourceProject = projectFile.GetProject();
@@ -50,7 +53,7 @@ namespace TddProductivity.MoveClass
 
                 foreach (IProject project in ProjectUtil.GetReferencedProjects(sourceProject))
                 {
-                    BulbItem item = CreateBulbItem(classname, relativeNamespace, project);
+                    BulbItem item = CreateBulbItem(classname, relativeNamespace, project, templateFilename , templateName);
 
                     quickFixItems.Add(item);
                 }
@@ -58,17 +61,18 @@ namespace TddProductivity.MoveClass
             }
         }
 
-        #endregion
+        
 
-        private BulbItem CreateBulbItem(string classname, string relativeNamespace, IProject project)
+        private BulbItem CreateBulbItem(string classname, string relativeNamespace, IProject project, string templateName, string codeFileToCreateName)
         {
             var DTO = new CreateClassRequestMessage
                           {
                               Classname = classname,
                               Namespace = relativeNamespace,
-                              Project = project
+                              Project = project,
+                              Template= templateName
                           };
-            string QuickFixText = "Create Class in " + project.Name;
+            string QuickFixText = string.Format("Create {0} in {1}" ,codeFileToCreateName, project.Name);
             return new BulbItem(QuickFixText, new CreateClassAction(DTO));
         }
 
