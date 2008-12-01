@@ -9,7 +9,7 @@ namespace TddProductivity.Templates
 {
     public class DefaultTemplateCreator : IDefaultTemplateCreator
     {
-        #region IDefaultTemplateCreator Members
+        
 
         public Template CreateTemplate(TemplateDefinition definition)
         {
@@ -29,36 +29,10 @@ namespace TddProductivity.Templates
             return template;
         }
 
-        #endregion
-
+        
         private static ITemplateStorage GetOrCreateTestDriveFolder()
         {
-            //ITemplateStorage storage = UserStorage.
-
             return FileTemplatesManager.Instance.TemplateFamily.UserStorage;
-            //TemplateManager.Instance.FileTemplatesStorageGroup.UserStorage;
-            //storage.
-            //  foreach (ITemplateStorage folder in storage.SubFolders)
-            //{
-            //  if (folder.Name == TDConstants.TemplateFolderName)
-            //  {
-            //    return folder;
-            //  }
-            //}
-
-            //  storage.Templates.
-            //return storage.AddSubFolder(TDConstants.TemplateFolderName);
         }
-    }
-
-    public class TemplateDefinition
-    {
-        public string Name;
-        public string TemplateName;
-    }
-
-    public interface IDefaultTemplateCreator
-    {
-        Template CreateTemplate(TemplateDefinition definition);
     }
 }

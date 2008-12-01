@@ -20,16 +20,16 @@ namespace TddProductivity.MoveClass
 
         public void Execute()
         {
-            var folderCreator = new FolderCreator();
-            IProjectFolder folder = folderCreator.GetOrCreateNestedFolders(createInterfaceRequestMessage.Project.GetProject(),
-                                                                           ConvertNamespaceToFolderNameArray());
-            var fetcher = new TemplateFetcher(new DefaultTemplateCreator(), new FolderTemplateFetcher(),
-                                              new TemplateFolderPrioritizer());
+            //var folderCreator = new VsFolderCreator();
+            //IProjectFolder folder = folderCreator.GetOrCreateNestedFolders(createInterfaceRequestMessage.Project.GetProject(),
+            //                                                               ConvertNamespaceToFolderNameArray());
+            //var fetcher = new TemplateFetcher(new DefaultTemplateCreator(), new FolderTemplateFetcher(),
+            //                                  new TemplateFolderPrioritizer());
 
-            Template template = fetcher.FetchTemplate(new TemplateDefinition { Name = "TDD.Interface" });
+            //Template template = fetcher.FetchTemplate(new TemplateDefinition { Name = "TDD.Interface" });
 
-            new TemplateFieldPopulator().PopulateTemplate(template, createInterfaceRequestMessage.Interfacename);
-            new TemplateFileCreator().CreateFile(createInterfaceRequestMessage.Interfacename + ".cs", template, folder);
+            //new TemplateFieldPopulator().PopulateTemplate(template, createInterfaceRequestMessage.Interfacename);
+            //new TemplateFileCreator().CreateFile(createInterfaceRequestMessage.Interfacename + ".cs", template, folder);
         }
 
         #endregion
