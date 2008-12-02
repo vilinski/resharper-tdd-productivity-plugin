@@ -31,7 +31,7 @@ namespace TddProductivity.MoveClass
             CreateNewFileFromVsTemplate(folder);
         }
 
-        private void CreateNewFileFromVsTemplate(ProjectItem folder)
+        private void CreateNewFileFromVsTemplate(ProjectItems folder)
         {
             
             new TemplateFileCreator().CreateFile(createClassRequestMessage.Project.GetSolution(),folder,createClassRequestMessage.Classname + ".cs",createClassRequestMessage.Classname,createClassRequestMessage.Template);
