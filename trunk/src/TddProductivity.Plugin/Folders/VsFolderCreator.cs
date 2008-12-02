@@ -41,7 +41,7 @@ namespace TddProductivity.Folders
         //}
 
 
-        public ProjectItem CreateVsFolder(IProject project, string[] folders)
+        public ProjectItems CreateVsFolder(IProject project, string[] folders)
         {
             VSProjectInfo projectInfo;
             projectInfo = ProjectModelSynchronizer.GetInstance(project.GetSolution()).GetProjectInfoByProject(project);
@@ -50,8 +50,9 @@ namespace TddProductivity.Folders
 
 
             Project envProject = projectInfo.GetExtProject();
-            ProjectItem projectItem = null;
+            
             ProjectItems projectItems = envProject.ProjectItems;
+            ProjectItem projectItem = null;
             foreach (string folder in folders)
             {
                 projectItem = GetOrCreateFolder(projectItems, folder);
@@ -59,7 +60,7 @@ namespace TddProductivity.Folders
                 envProject.Save(envProject.FullName);
                 projectItems = projectItem.ProjectItems;
             }
-            return projectItem;
+            return projectItems;
             //return project.FindProjectItemByLocation(new FileSystemPath(projectItem.get_FileNames(0))) as IProjectFolder;
         }
 

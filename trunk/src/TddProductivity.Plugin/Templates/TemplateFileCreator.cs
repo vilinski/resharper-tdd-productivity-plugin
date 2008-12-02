@@ -25,18 +25,23 @@ namespace TddProductivity.Templates
             LiveTemplatesController.Instance.ExecuteTemplate(projectFolder.GetSolution(), template, textControl);
         }
 
-        public void CreateFile(ISolution solution, ProjectItem projectItem, string fileName,
+        public void CreateFile(ISolution solution, ProjectItems projectItems, string fileName,
                                string itemName,string templateName)
         {
-            string filePath = Path.Combine(projectItem.get_FileNames(0), fileName);
-
-            var dteSolution = projectItem.DTE.Solution as Solution2;
+            string filePath;
+            if(projectItems.Parent is ProjectItem)
+                filePath = Path.Combine(((ProjectItem)projectItems.Parent) .get_FileNames(0), fileName);
+            else
+            {
+                filePath = Path.Combine( Path.GetDirectoryName(projectItems.ContainingProject.FullName),fileName);
+            }
+            var dteSolution = projectItems.DTE.Solution as Solution2;
 
             string templatepath = Path.Combine(Path.GetDirectoryName(this.GetType().Assembly.Location), "Resources\\"+templateName + "\\ClassUnderTest.vstemplate");
                 //dteSolution.GetProjectItemTemplate(templateName +".zip", "CSharp");
             ProjectItem fileitem = null;
-            projectItem.ProjectItems.AddFromTemplate(templatepath, fileName);
-            foreach (ProjectItem item in projectItem.ProjectItems)
+            projectItems.AddFromTemplate(templatepath, fileName);
+            foreach (ProjectItem item in projectItems)
             {
                 if(item.Name==fileName)
                 {
@@ -47,7 +52,7 @@ namespace TddProductivity.Templates
 
             //File.CreateText(filePath).Close();
             //ProjectItem fileitem = projectItem.ProjectItems .AddFromFile(filePath);
-            projectItem.ContainingProject.Save(null);
+            projectItems.ContainingProject.Save(null);
             
             var window = fileitem.Open("{7651A701-06E5-11D1-8EBD-00A0C90F26EA}");
             window.Close(vsSaveChanges.vsSaveChangesYes);
