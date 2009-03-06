@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using JetBrains.ProjectModel;
-using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Daemon.CSharp.Stages;
+using JetBrains.ReSharper.Feature.Services.Bulbs;
+using JetBrains.ReSharper.Intentions;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.Util;
-using ProjectUtil = TddProductivity.Projects.ProjectUtil;
+using ProjectUtil=TddProductivity.Projects.ProjectUtil;
 
 namespace TddProductivity.MoveClass
 {
@@ -22,7 +23,7 @@ namespace TddProductivity.MoveClass
             quickFix = Activator.CreateCreateClassFix(error);
         }
 
-        
+        #region IQuickFix Members
 
         public bool IsAvailable(IUserDataHolder cache)
         {
@@ -34,8 +35,8 @@ namespace TddProductivity.MoveClass
         {
             get
             {
-                string templateFilename="tdd.class";
-                string templateName="Class";
+                string templateFilename = "tdd.class";
+                string templateName = "Class";
                 var quickFixItems = new List<IBulbItem>();
 
                 IProjectFile projectFile = GetProjectFile();
@@ -53,7 +54,7 @@ namespace TddProductivity.MoveClass
 
                 foreach (IProject project in ProjectUtil.GetReferencedProjects(sourceProject))
                 {
-                    BulbItem item = CreateBulbItem(classname, relativeNamespace, project, templateFilename , templateName);
+                    BulbItem item = CreateBulbItem(classname, relativeNamespace, project, templateFilename, templateName);
 
                     quickFixItems.Add(item);
                 }
@@ -61,18 +62,19 @@ namespace TddProductivity.MoveClass
             }
         }
 
-        
+        #endregion
 
-        private BulbItem CreateBulbItem(string classname, string relativeNamespace, IProject project, string templateName, string codeFileToCreateName)
+        private BulbItem CreateBulbItem(string classname, string relativeNamespace, IProject project,
+                                        string templateName, string codeFileToCreateName)
         {
             var DTO = new CreateClassRequestMessage
                           {
                               Classname = classname,
                               Namespace = relativeNamespace,
                               Project = project,
-                              Template= templateName
+                              Template = templateName
                           };
-            string QuickFixText = string.Format("Create {0} in {1}" ,codeFileToCreateName, project.Name);
+            string QuickFixText = string.Format("Create {0} in {1}", codeFileToCreateName, project.Name);
             return new BulbItem(QuickFixText, new CreateClassAction(DTO));
         }
 
@@ -92,7 +94,7 @@ namespace TddProductivity.MoveClass
 
         private string GetClassName()
         {
-            return ((IReferenceName)error.Reference.GetElement()).ShortName;
+            return ((IReferenceName) error.Reference.GetElement()).ShortName;
         }
 
         private IProjectFile GetProjectFile()

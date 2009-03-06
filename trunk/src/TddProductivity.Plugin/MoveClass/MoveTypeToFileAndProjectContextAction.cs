@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon;
+using JetBrains.ReSharper.Feature.Services.Bulbs;
+using JetBrains.ReSharper.Intentions;
 using JetBrains.ReSharper.Intentions.CSharp.ContextActions;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.TextControl;
@@ -17,15 +19,16 @@ namespace TddProductivity.MoveClass
         private readonly ElementFinder _elementFinder;
         private readonly ISolution _solution;
         private readonly ITextControl _textControl;
+        private ICSharpContextActionDataProvider _provider;
 
 
-        public MoveTypeToFileAndProjectContextAction(ISolution solution, ITextControl textControl)
-
+        public MoveTypeToFileAndProjectContextAction(ICSharpContextActionDataProvider provider)
         {
-            _solution = solution;
-            _textControl = textControl;
-            _elementFinder = new ElementFinder(solution, textControl);
-            _action = new MoveTypeToAnotherFileAction(solution, textControl);
+
+            _provider = provider;
+            _solution = provider.Solution;
+            _elementFinder = new ElementFinder(_provider);
+            _action = new MoveTypeToAnotherFileAction(provider);
         }
 
         public IProject CurrentProject { get; set; }
@@ -56,7 +59,7 @@ namespace TddProductivity.MoveClass
                     IProject project = reference.ResolveReferencedProject();
                     if (CanMoveToThisProject(project))
                     {
-                        items.Add(new MoveClassBulbItem(project, _action, new ElementFinder(_solution, _textControl)));
+                        items.Add(new MoveClassBulbItem(project, _action, new ElementFinder(_provider)));
                     }
                 }
                 return items.ToArray();

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using JetBrains.ReSharper.Feature.Services.LiveTemplates.FileTemplates;
+using JetBrains.ReSharper.Feature.Services.LiveTemplates.Storages;
 using JetBrains.ReSharper.LiveTemplates.FileTemplates;
-using JetBrains.ReSharper.LiveTemplates.Storages;
 using JetBrains.Util;
 
 namespace TddProductivity.Templates

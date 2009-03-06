@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon;
+using JetBrains.ReSharper.Feature.Services.Bulbs;
 using JetBrains.TextControl;
 
 namespace TddProductivity.MoveClass

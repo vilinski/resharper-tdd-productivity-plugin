@@ -1,4 +1,5 @@
 using System;
+using JetBrains.ReSharper.Feature.Services.LiveTemplates.Hotspots;
 using JetBrains.ReSharper.LiveTemplates;
 using JetBrains.ReSharper.LiveTemplates.Execution;
 using JetBrains.ReSharper.LiveTemplates.Templates;
@@ -31,7 +32,7 @@ namespace TddProductivity.Services.Templates.Impl
 
         #region Nested type: StaticTemplateExpression
 
-        private class StaticTemplateExpression : ITemplateExpression
+        private class StaticTemplateExpression : IHotspotExpression
         {
             private readonly string _text;
 
@@ -42,19 +43,20 @@ namespace TddProductivity.Services.Templates.Impl
 
             #region ITemplateExpression Members
 
-            public string EvaluateQuickResult(IMacroContext context)
+
+            public string EvaluateQuickResult(IHotspotContext context)
             {
                 return _text;
             }
 
-            public bool HandleExpansion(IMacroContext context)
+            public bool HandleExpansion(IHotspotContext context)
             {
                 return true;
             }
 
-            public LookupItems GetLookupItems(IMacroContext context)
+            public HotspotItems GetLookupItems(IHotspotContext context)
             {
-                return LookupItems.Empty;
+                return HotspotItems.Empty;
             }
 
             public string Serialize()

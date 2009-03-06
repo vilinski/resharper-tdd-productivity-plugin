@@ -4,6 +4,7 @@ using JetBrains.Application;
 using JetBrains.IDE;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon;
+using JetBrains.ReSharper.Feature.Services.Bulbs;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.TextControl;
 

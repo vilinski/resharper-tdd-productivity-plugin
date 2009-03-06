@@ -1,5 +1,6 @@
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Daemon.CSharp.Stages;
+using JetBrains.ReSharper.Feature.Services.Bulbs;
 using JetBrains.ReSharper.Psi.Resolve;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;

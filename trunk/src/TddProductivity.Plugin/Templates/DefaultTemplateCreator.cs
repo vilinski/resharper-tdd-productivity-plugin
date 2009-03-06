@@ -1,8 +1,8 @@
 using System.IO;
 using System.Reflection;
 using System.Xml;
-using JetBrains.ReSharper.LiveTemplates.FileTemplates;
-using JetBrains.ReSharper.LiveTemplates.Storages;
+using JetBrains.ReSharper.Feature.Services.LiveTemplates.FileTemplates;
+using JetBrains.ReSharper.Feature.Services.LiveTemplates.Storages;
 using JetBrains.ReSharper.LiveTemplates.Templates;
 
 namespace TddProductivity.Templates
