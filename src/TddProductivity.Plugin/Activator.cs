@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Daemon.CSharp.Stages;
+using JetBrains.ReSharper.Feature.Services.Bulbs;
 
 namespace TddProductivity
 {

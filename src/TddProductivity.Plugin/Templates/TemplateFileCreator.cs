@@ -3,8 +3,10 @@ using System.IO;
 using System.Linq;
 using EnvDTE;
 using EnvDTE80;
+using JetBrains.ActionManagement;
 using JetBrains.IDE;
 using JetBrains.ProjectModel;
+using JetBrains.ReSharper.Feature.Services.Util;
 using JetBrains.ReSharper.LiveTemplates.Execution;
 using JetBrains.ReSharper.LiveTemplates.Templates;
 using JetBrains.TextControl;
@@ -14,16 +16,24 @@ namespace TddProductivity.Templates
 {
     public class TemplateFileCreator : ITemplateFileCreator
     {
-        public void CreateFile(string fileName, Template template, IProjectFolder projectFolder)
-        {
-            IProjectFile file = AddNewItemUtil.AddFile(projectFolder, fileName);
+        //public void CreateFile(string fileName, Template template, IProjectFolder projectFolder)
+        //{
+            
+        //    IProjectFile file = AddNewItemUtil.AddFile(projectFolder, fileName);
 
-            if (file == null) return;
+        //    if (file == null) return;
 
-            ITextControl textControl = EditorManager.GetInstance(file.GetSolution()).OpenProjectFile(file, true);
-            textControl.WindowModel.Focus();
-            LiveTemplatesController.Instance.ExecuteTemplate(projectFolder.GetSolution(), template, textControl);
-        }
+        //    ITextControl textControl = EditorManager.GetInstance(file.GetSolution()).OpenProjectFile(file, true);
+        //    textControl.WindowModel.Focus();
+        //    //textControl.
+        //    //TODO: Fix this R# Mess in order to enable live templates.
+        //    //JetBrains.ReSharper.Feature.Services.LiveTemplates.Context.TemplateContextUtil.GetLiveTemplates().ContextFactory.
+        //    //IDataContext foo= new DataContext(textControl.);
+        //    //JetBrains.ReSharper.Feature.Services.LiveTemplates.FileTemplates.FileTemplatesManager.Instance.CreateFileFromTemplate(foo,template);
+        //        //.Intentions.Util.TemplateUtil.ExecuteTemplate();
+        //     //JetBrains.ReSharper.Intentions.Util.TemplateUtil
+        //    //LiveTemplatesController.Instance.ExecuteTemplate(projectFolder.GetSolution(), template, textControl);
+        //}
 
         public void CreateFile(ISolution solution, ProjectItems projectItems, string fileName,
                                string itemName,string templateName)

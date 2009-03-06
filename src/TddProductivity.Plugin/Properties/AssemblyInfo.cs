@@ -1,5 +1,6 @@
 using System.Reflection;
-using JetBrains.UI.Shell.PluginSupport;
+using JetBrains.UI.Application.PluginSupport;
+
 
 //
 // General Information about an assembly is controlled through the following 
@@ -12,10 +13,10 @@ using JetBrains.UI.Shell.PluginSupport;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("Eric Hexter - 2008")]
+[assembly: AssemblyCopyright("Eric Hexter - 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("1.0.0.*")]
+[assembly: AssemblyVersion("1.0.1.*")]
 [assembly: AssemblyDelaySign(false)]
 [assembly: AssemblyKeyFile("")]
 [assembly: AssemblyKeyName("")]
