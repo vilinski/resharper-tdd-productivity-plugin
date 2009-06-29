@@ -1,8 +1,6 @@
 using EnvDTE;
 using JetBrains.ProjectModel;
-using JetBrains.Util;
 using JetBrains.VSIntegration.ProjectModel;
-using System.Windows.Forms;
 
 namespace TddProductivity.Folders
 {
