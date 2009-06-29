@@ -111,10 +111,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\resharper\v4.5\bin\JetBrains.Platform.ReSharper.ProjectModel.dll</HintPath>
     </Reference>
-    <Reference Include="JetBrains.Platform.ReSharper.Satellite, Version=4.5.1181.216, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\resharper\v4.5\bin\JetBrains.Platform.ReSharper.Satellite.exe</HintPath>
-    </Reference>
     <Reference Include="JetBrains.Platform.ReSharper.Shell, Version=4.5.1181.216, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\resharper\v4.5\bin\JetBrains.Platform.ReSharper.Shell.dll</HintPath>
@@ -182,10 +178,6 @@
     <Reference Include="JetBrains.ReSharper.ExternalProcessStorage, Version=4.5.1181.216, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\resharper\v4.5\bin\JetBrains.ReSharper.ExternalProcessStorage.dll</HintPath>
-    </Reference>
-    <Reference Include="JetBrains.ReSharper.ExternalProcessStorage.Process, Version=4.5.1181.216, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\resharper\v4.5\bin\JetBrains.ReSharper.ExternalProcessStorage.Process.exe</HintPath>
     </Reference>
     <Reference Include="JetBrains.ReSharper.Feature.Services, Version=4.5.1181.216, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -363,18 +355,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\resharper\v4.5\bin\JetBrains.ReSharper.SolutionBuilder.VS.dll</HintPath>
     </Reference>
-    <Reference Include="JetBrains.ReSharper.TaskRunner, Version=4.5.1181.216, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\resharper\v4.5\bin\JetBrains.ReSharper.TaskRunner.exe</HintPath>
-    </Reference>
-    <Reference Include="JetBrains.ReSharper.TaskRunnerFramework, Version=4.5.1181.216, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\resharper\v4.5\bin\JetBrains.ReSharper.TaskRunnerFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="JetBrains.ReSharper.TestFramework, Version=4.5.1181.216, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\resharper\v4.5\bin\JetBrains.ReSharper.TestFramework.dll</HintPath>
-    </Reference>
     <Reference Include="JetBrains.ReSharper.TodoExplorer, Version=4.5.1181.216, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\resharper\v4.5\bin\JetBrains.ReSharper.TodoExplorer.dll</HintPath>
@@ -420,7 +400,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TemplateSpecs.cs" />
-    <Compile Include="ElementFinderSpecs.cs" />
     <Compile Include="MoveClassBulbItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecBase.cs" />

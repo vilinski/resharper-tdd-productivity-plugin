@@ -1,0 +1,1 @@
+How to debug plugin: http://www.jetbrains.net/confluence/display/ReSharper/Building,+running+and+debugging+plugin

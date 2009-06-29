@@ -20,7 +20,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>c:\Program Files\JetBrains\ReSharper\v4.1\Bin\Plugins\TddProductivity\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -28,7 +28,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -414,13 +414,10 @@
     <Compile Include="Activator.cs" />
     <Compile Include="AutoUpdate.cs" />
     <Compile Include="Folders\VsFolderCreator.cs" />
-    <Compile Include="MoveClass\ActionChainProcessor.cs" />
     <Compile Include="MoveClass\BulbItem.cs" />
     <Compile Include="MoveClass\CreateClassAction.cs" />
     <Compile Include="MoveClass\CreateClassQuickFix.cs" />
     <Compile Include="MoveClass\CreateClassRequestMessage.cs" />
-    <Compile Include="MoveClass\ElementFinder.cs" />
-    <Compile Include="MoveClass\IElementFinder.cs" />
     <Compile Include="MoveClass\IExecuteAction.cs" />
     <Compile Include="MoveClass\MoveClassBulbItem.cs">
       <SubType>Code</SubType>
