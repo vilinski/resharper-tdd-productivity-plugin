@@ -45,5 +45,18 @@ namespace TddProductivity.Tests.Services
             Assert.AreEqual(results[1], "Controllers");
             Assert.AreEqual(results[2], "Area");
         }
+
+        [Test]
+        public void Should_not_change_empty_folder_collection()
+        {
+            //arrange
+            string defaultNamespace = "CodeCampServer.FooFighters";
+            string[] folders = new string[0];
+
+            //act
+            var results = VsFolderCreator.FilterDuplicationFolderNames(defaultNamespace, folders);
+            //assert
+            Assert.That(results.Length, Is.EqualTo(0));
+        }
     }
 }

@@ -43,15 +43,16 @@ namespace TddProductivity.Folders
         public static string[] FilterDuplicationFolderNames(string defaultNamespace, string[] foldersToCreate)
         {
             List<string> output = new List<string>(foldersToCreate);
-            foreach (string nameSpace in defaultNamespace.Split('.'))
+            if (output.Count > 0)
             {
-                if (output[0].Equals(nameSpace))
+                foreach (string nameSpace in defaultNamespace.Split('.'))
                 {
-                    output.RemoveAt(0);
+                    if (output[0].Equals(nameSpace))
+                    {
+                        output.RemoveAt(0);
+                    }
                 }
             }
-
-
             return output.ToArray();
         }
 
