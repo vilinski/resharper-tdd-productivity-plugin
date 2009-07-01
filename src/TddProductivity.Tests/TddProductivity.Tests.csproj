@@ -399,6 +399,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\FolderFilterTester.cs" />
     <Compile Include="TemplateSpecs.cs" />
     <Compile Include="MoveClassBulbItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -410,9 +411,6 @@
       <Project>{4223E1C5-7AC8-4B81-942F-F331B972028C}</Project>
       <Name>TddProductivity.Plugin</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

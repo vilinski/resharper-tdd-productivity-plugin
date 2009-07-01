@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using EnvDTE;
 using JetBrains.ProjectModel;
 using JetBrains.VSIntegration.ProjectModel;
@@ -38,14 +40,30 @@ namespace TddProductivity.Folders
         //    //return project.FindProjectItemByLocation(new FileSystemPath(projectItem.get_FileNames(0))) as IProjectFolder;
         //}
 
+        public static string[] FilterDuplicationFolderNames(string defaultNamespace, string[] foldersToCreate)
+        {
+            List<string> output = new List<string>(foldersToCreate);
+            foreach (string nameSpace in defaultNamespace.Split('.'))
+            {
+                if (output[0].Equals(nameSpace))
+                {
+                    output.RemoveAt(0);
+                }
+            }
+
+
+            return output.ToArray();
+        }
 
         public ProjectItems CreateVsFolder(IProject project, string[] folders)
         {
+            
             VSProjectInfo projectInfo;
             projectInfo = ProjectModelSynchronizer.GetInstance(project.GetSolution()).GetProjectInfoByProject(project);
 
             if (projectInfo == null) return null;
 
+            folders = FilterDuplicationFolderNames(project.GetDefaultNamespaceProperty(), folders);
 
             Project envProject = projectInfo.GetExtProject();
             
