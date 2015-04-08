@@ -1,0 +1,1 @@
+Resharper is a Addin for Visual Studio which adds a number of refactoring and productivity enhancements.  [You can learn more about it here](http://jetbrains.com/resharper).
